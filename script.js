@@ -1,10 +1,7 @@
-// https://jsonplaceholder.typicode.com/posts
-
-function renderPosts() {
-  const bodyElement = document.querySelector('body');
+function renderPosts(bodyEl) {
   const postsWrapperEl = document.createElement('div');
 
-  bodyElement.append(postsWrapperEl);
+  bodyEl.append(postsWrapperEl);
 
   fetch(`https://jsonplaceholder.typicode.com/posts?_limit=15&_embed=comments&_expand=user`)
     .then(res => res.json())
@@ -25,7 +22,7 @@ function renderPosts() {
         postTitleEl.textContent = postTitleTxt;
         postTextEl.textContent = postParagraphTxt;
         commentsHeaderEl.textContent = 'Comments:'
-        postAuthorLinkEl.innerHTML = `Author: <a href="$">${postAuthorName}</a>`;
+        postAuthorLinkEl.innerHTML = `Author: <a href="/user.html">${postAuthorName}</a>`;
         
 
         post.comments.map(comment => {
@@ -44,9 +41,41 @@ function renderPosts() {
 
         postWrapperEl.append(postTitleEl, postAuthorLinkEl, postTextEl);
 
-        postsWrapperEl.append(postWrapperEl,commentsWrapperEl)
+        postsWrapperEl.append(postWrapperEl, commentsWrapperEl)
       });
     });
 };
 
-renderPosts();
+function renderAlbums(bodyEl) {
+  const albumWrapperEl = document.createElement('div');
+  albumWrapperEl.classList.add('albums-wrapper');
+
+  bodyEl.append(albumWrapperEl);
+
+  fetch(`https://jsonplaceholder.typicode.com/albums?_limit=15&_embed=photos&_expand=user`)
+    .then(res => res.json())
+    .then(albums => {
+      albums.map(album => {
+        let albumNameEl = document.createElement('h3');
+        let albumAuthorsName = document.createElement('p');
+        let albumPhotosThumbnail = document.createElement('img');
+
+        albumNameEl.innerHTML = `<a href="/album.html">${album.title}</a>`;
+        albumAuthorsName.textContent = `Created by: ${album.user.name}`;
+        
+        albumPhotosThumbnail.src = album.photos[0].thumbnailUrl;
+        albumPhotosThumbnail.alt = album.photos[0].title;
+
+        albumWrapperEl.append(albumNameEl, albumAuthorsName, albumPhotosThumbnail);
+      });
+    });
+};
+
+function init() {
+  const bodyElement = document.querySelector('body');
+
+  renderPosts(bodyElement);
+  renderAlbums(bodyElement);
+};
+
+init();
