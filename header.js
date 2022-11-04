@@ -51,7 +51,7 @@ function createHeader(body) {
   searchFormEl.action = './search.html';
   
 
-  body.append(headerEl);
+  body.prepend(headerEl);
 };
 
 function init() {
@@ -60,4 +60,4 @@ function init() {
   createHeader(bodyElement);
 };
 
-init();
+export default init;

@@ -1,3 +1,5 @@
+import createHeader from './header.js';
+
 function renderAllUsers(bodyEl) {
   const usersWrapperEl = document.createElement('div');
   usersWrapperEl.classList.add('users-wrapper');
@@ -27,6 +29,7 @@ function renderAllUsers(bodyEl) {
 function init() {
   const bodyElement = document.querySelector('body');
 
+  createHeader();
   renderAllUsers(bodyElement);
 };
 

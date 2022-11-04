@@ -1,3 +1,5 @@
+import createHeader from './header.js';
+
 function renderUser(bodyEl, user) {
   const userWrapperEl = document.createElement('div');
   userWrapperEl.classList.add('user-wrapper');
@@ -83,6 +85,7 @@ function renderUserAlbums(bodyEl, user) {
     const urlParams = new URLSearchParams(queryParams);
     const userId = urlParams.get('user_id');
 
+    createHeader();
     renderUser(bodyElement, userId);
     renderUserPosts(bodyElement, userId);
     renderUserAlbums(bodyElement, userId);

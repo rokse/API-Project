@@ -1,3 +1,5 @@
+import createHeader from './header.js';
+
 function renderAllAlbums(bodyEl) {
   const albumsWrapperEl = document.createElement('div');
   albumsWrapperEl.classList.add('albums-wrapper')
@@ -40,15 +42,8 @@ function renderAllAlbums(bodyEl) {
 function init() {
   const bodyElement = document.querySelector('body');
 
-  currentPageMarkOnNavEl();
+  createHeader();
   renderAllAlbums(bodyElement);
 };
 
 init();
-
-// 9. Tokiu pačiu principu, kaip ir vartotojų puslapį, sukurti puslapį albumams (albums.html).
-//   9.1. Prie kiekvieno albumo turi būti:
-//     9.1.1. Parašytas jo pavadinimas.
-//     9.1.2. Parašytas vartotojo, sukūrusio šį albumą, vardas.
-//     9.1.3. Albume esančių nuotraukų skaičius.
-//     9.1.4. Viena nuotrauka

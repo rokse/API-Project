@@ -1,3 +1,5 @@
+import createHeader from './header.js'
+
 async function renderPosts(bodyEl) {
   const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=15&_embed=comments&_expand=user`);
   const posts = await res.json();
@@ -71,6 +73,7 @@ async function renderAlbums(bodyEl) {
 async function init() {
   const bodyElement = document.querySelector('body');
 
+  createHeader();
   await renderPosts(bodyElement);
   await renderAlbums(bodyElement);
 };
